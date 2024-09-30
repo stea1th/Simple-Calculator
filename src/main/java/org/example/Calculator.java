@@ -6,7 +6,6 @@ public class Calculator {
         boolean weiter = true;
         while (weiter) {
             try {
-                CalculatorMenu.showMenu();
                 CalculatorModel calculatorModel = CalculatorMenu.readChoiceAndNumberValues();
                 calculatorModel = CalculationProcessor.calculateResult(calculatorModel);
                 CalculatorMenu.decideForShowAllResults(calculatorModel);
