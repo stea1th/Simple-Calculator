@@ -9,19 +9,19 @@ public final class CalculatorMenu {
     private CalculatorMenu() {
     }
 
-    public static void showMenu() {
-        System.out.println("Wählen Sie eine Operation:");
-        System.out.println("1 - Addition");
-        System.out.println("2 - Subtraktion");
-        System.out.println("3 - Multiplikation");
-        System.out.println("4 - Division");
-        System.out.println("5 - Potenz (x^y)");
-        System.out.println("6 - Modulo");
-        System.out.println("0 - Beenden");
+    public static String showMenu() {
+        return "Wählen Sie eine Operation: " + System.lineSeparator()
+                + "1 - Addition " + System.lineSeparator()
+                + "2 - Subtraktion " + System.lineSeparator()
+                + "3 - Multiplikation " + System.lineSeparator()
+                + "4 - Division " + System.lineSeparator()
+                + "5 - Potenz (x^y) " + System.lineSeparator()
+                + "6 - Modulo " + System.lineSeparator()
+                + "0 - Beenden";
     }
 
     public static CalculatorModel readChoiceAndNumberValues() {
-        int choice = readIntValues();
+        int choice = readIntValues(showMenu());
         if (choice == 0) {
             return new CalculatorModel();
         }
@@ -59,7 +59,8 @@ public final class CalculatorMenu {
         }
     }
 
-    private static int readIntValues() {
+    private static int readIntValues(String message) {
+        System.out.println(message);
         try {
             String nextLine = scanner.nextLine();
             return Integer.parseInt(nextLine);
@@ -77,5 +78,4 @@ public final class CalculatorMenu {
             throw new CalculatorException(e.toString(), false);
         }
     }
-
 }
