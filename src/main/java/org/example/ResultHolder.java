@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 public final class ResultHolder {
 
-    private final static HashSet<Double> resultSet = new HashSet<>();
+    private static final HashSet<Double> resultSet = new HashSet<>();
 
     private ResultHolder() {
     }
