@@ -8,17 +8,20 @@ public class CalculatorModel {
 
     private Double result;
 
-    private boolean cancelCalculation = false;
+    private boolean isMenuCheck;
 
-    private int choice = 0;
+    private int choice;
 
-    public CalculatorModel() {
+    public CalculatorModel(int choice) {
+        this.choice = choice;
     }
 
-    public CalculatorModel(double firstNumber, double secondNumber, int choice) {
-        this.firstNumber = firstNumber;
-        this.secondNumber = secondNumber;
-        this.choice = choice;
+    public boolean isMenuCheck() {
+        return isMenuCheck;
+    }
+
+    public void setMenuCheck(boolean menuCheck) {
+        isMenuCheck = menuCheck;
     }
 
     public void setFirstNumber(double firstNumber) {
@@ -27,10 +30,6 @@ public class CalculatorModel {
 
     public void setSecondNumber(double secondNumber) {
         this.secondNumber = secondNumber;
-    }
-
-    public void setCancelCalculation(boolean cancelCalculation) {
-        this.cancelCalculation = cancelCalculation;
     }
 
     public double getFirstNumber() {
@@ -45,10 +44,6 @@ public class CalculatorModel {
         return result;
     }
 
-    public boolean isCancelCalculation() {
-        return cancelCalculation;
-    }
-
     public int getChoice() {
         return choice;
     }
@@ -61,3 +56,4 @@ public class CalculatorModel {
         this.choice = choice;
     }
 }
+
