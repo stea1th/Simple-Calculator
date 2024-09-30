@@ -9,33 +9,20 @@ public final class CalculatorMenu {
     private CalculatorMenu() {
     }
 
-    public static String showMenu() {
-        return "Wählen Sie eine Operation: " + System.lineSeparator()
-                + "1 - Addition " + System.lineSeparator()
-                + "2 - Subtraktion " + System.lineSeparator()
-                + "3 - Multiplikation " + System.lineSeparator()
-                + "4 - Division " + System.lineSeparator()
-                + "5 - Potenz (x^y) " + System.lineSeparator()
-                + "6 - Modulo " + System.lineSeparator()
-                + "0 - Beenden";
-    }
-
-    public static CalculatorModel readChoiceAndNumberValues() {
+    public static CalculatorModel readMenuChoice() {
         int choice = readIntValues(showMenu());
-        if (choice == 0) {
-            return new CalculatorModel();
-        }
-        var firstNumber = readDoubleValues("Bitte geben Sie die erste Zahl ein:");
-        var secondNumber = readDoubleValues("Bitte geben Sie die zweite Zahl ein:");
-        return new CalculatorModel(firstNumber, secondNumber, choice);
+        return new CalculatorModel(choice);
     }
 
-    public static CalculatorModel decideForNextCalculation(CalculatorModel calculatorModel) {
-        if (calculatorModel.isCancelCalculation()) {
-            return calculatorModel;
+    public static void readExpressionNumberValues(CalculatorModel calculatorModel) {
+        calculatorModel.setFirstNumber(readDoubleValues("Bitte geben Sie die erste Zahl ein:"));
+        calculatorModel.setSecondNumber(readDoubleValues("Bitte geben Sie die zweite Zahl ein:"));
+    }
+
+    public static void decideForNextCalculation() {
+        if (!readCharAndDecide("Möchten Sie eine weitere Berechnung durchführen? (j/n)")) {
+            throw new CalculatorException("Taschenrechner beendet.", true);
         }
-        calculatorModel.setCancelCalculation(readCharAndDecide("Möchten Sie eine weitere Berechnung durchführen? (j/n)"));
-        return calculatorModel;
     }
 
     public static void decideForShowAllResults(CalculatorModel calculatorModel) {
@@ -47,6 +34,16 @@ public final class CalculatorMenu {
 
     public static void closeScanner() {
         scanner.close();
+    }
+
+    private static String showMenu() {
+        return "Wählen Sie eine Operation: " + System.lineSeparator()
+                + "1 - Addition " + System.lineSeparator()
+                + "2 - Subtraktion " + System.lineSeparator()
+                + "3 - Multiplikation " + System.lineSeparator()
+                + "4 - Division " + System.lineSeparator()
+                + "5 - Modulo " + System.lineSeparator()
+                + "0 - Beenden";
     }
 
     private static boolean readCharAndDecide(String message) {
@@ -79,3 +76,4 @@ public final class CalculatorMenu {
         }
     }
 }
+
