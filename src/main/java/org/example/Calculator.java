@@ -3,18 +3,19 @@ package org.example;
 public class Calculator {
 
     public static void main(String[] args) {
-        boolean weiter = true;
-        while (weiter) {
+        boolean isTrue = true;
+        while (isTrue) {
             try {
-                CalculatorModel calculatorModel = CalculatorMenu.readChoiceAndNumberValues();
+                CalculatorModel calculatorModel = CalculatorMenu.readMenuChoice();
+                CalculationProcessor.checkMenuChoice(calculatorModel);
+                CalculatorMenu.readExpressionNumberValues(calculatorModel);
                 calculatorModel = CalculationProcessor.calculateResult(calculatorModel);
                 CalculatorMenu.decideForShowAllResults(calculatorModel);
-                weiter = CalculatorMenu.decideForNextCalculation(calculatorModel).isCancelCalculation();
+                CalculatorMenu.decideForNextCalculation();
             } catch (CalculatorException e) {
                 System.out.println("<<< Exception: " + e.getMessage());
-                boolean fatal = e.isFatal();
-                if (fatal) {
-                    weiter = false;
+                if (e.isFatal()) {
+                    isTrue = false;
                     CalculatorMenu.closeScanner();
                 }
             }
